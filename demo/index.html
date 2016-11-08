@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+    <title>gogo-bloks demo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+
+    <link rel="import" href="../gogo-bloks.html">
+
+    <style is="custom-style" include="demo-pages-shared-styles">
+    </style>
+
+    <style>
+        .circle {
+            display: inline-block;
+            height: 64px;
+            width: 64px;
+            border-radius: 50%;
+            background: #E0E0E0;
+            line-height: 64px;
+            font-size: 30px;
+            color: #fff;
+            text-align: center;
+        }
+
+        img:focus {
+            border-color: #e0e0e0;
+            border-style: solid;
+            border-width: 4px;
+            border-radius: 50%;
+            height: 60px;
+            width: 60px;
+            line-height: 60px;
+            outline: none;
+
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="vertical-section-container centered">
+    <h3>Basic gogo-bloks Demo</h3>
+    <demo-snippet>
+        <template>
+            <gogo-bloks>
+
+                <span data-blok-ratio=""><img class="circle" tabindex="0" data-blok-ratio="" src="03.jpg"></span>
+                <span data-blok-ratio="dimidium">Individual webcomponents</span>
+                <div data-blok-ratio="dimidium"></div>
+                <span data-blok-ratio="quarta">in</span>
+                <div data-blok-ratio="quarta">different</div>
+                <div data-blok-ratio="quarta">Bloks.</div>
+                <span data-blok-ratio="quarta">Hi Blok</span>
+                <h3 data-blok-ratio="">GOGO Blok</h3>
+
+            </gogo-bloks>
+        </template>
+    </demo-snippet>
+</div>
+
+</body>
+</html>

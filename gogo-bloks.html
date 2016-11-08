@@ -1,0 +1,127 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+
+<!--
+`gogo-bloks`
+is a UI-component, which can be used similar as LEGO-Blocks. At the moment full, half and quarter blocks are available. Each blok can wrap individuel components.
+
+### How to use
+
+Custom property | Description | Default
+----------------|-------------|----------
+`data-blok-ratio="" or nothing` | full bledge | `{}`
+`data-blok-ratio="dimidium"` | half size | `{}`
+`data-blok-ratio="quarta"` | quarter size | `{}`
+
+### CSS mixins
+
+Custom property | Description | Default
+----------------|-------------|----------
+`--gogo-bloks-background` | background color bloks | `{}`
+`--gogo-bloks-box-background` | background color blok box | `{}`
+
+
+
+
+@author malte norstroem
+@demo demo/index.html
+-->
+
+<dom-module id="gogo-bloks">
+    <template>
+        <style>
+            :host {
+                display: block;
+                background-color: var(--gogo-bloks-background, #F5F5F5);
+                padding: 8px;
+            }
+
+            .flex-wrap {
+                @apply(--layout-horizontal);
+                @apply(--layout-wrap);
+            }
+
+            .container > div {
+                box-sizing: border-box;
+                border: 8px solid transparent;
+            }
+
+            .box {
+                position: relative;
+                width: 100%; /* desired width */
+            }
+
+            .box:before {
+                content: "";
+                display: block;
+                padding-top:75%;
+                background-color: var(--gogo-bloks-box-background, #ffffff);
+            }
+
+            .box.dimidium{
+                width: 50%;
+            }
+
+            .dimidium:before {
+                padding-top: 100%;
+            }
+
+            .box.quarta{
+                width: 25%;
+            }
+            .quarta:before {
+                padding-top: 100%;
+            }
+
+            .content {
+                position: absolute;
+                top: 16px;
+                left: 16px;
+                bottom: 16px;
+                right: 16px;
+                overflow: hidden;
+            }
+        </style>
+
+        <content id="elemContent" style="display: none"></content>
+
+        <div id="blok" class="container flex-wrap"></div>
+
+    </template>
+
+
+    <script>
+        Polymer({
+
+            is: 'gogo-bloks',
+
+            properties: {
+                contentElements: {
+                    type: Array
+                }
+            },
+
+            ready: function () {
+                this.set('contentElements', this.getContentChildren('#elemContent'));
+
+                for (var i = 0; i < this.contentElements.length; i++) {
+
+                    var blokRatio = this.contentElements[i].getAttribute('data-blok-ratio');
+                    var elemBox = document.createElement('div');
+                    elemBox.className = "box " + blokRatio;
+
+                    var elemWrap = document.createElement('div');
+                    elemWrap.className = "content";
+
+                    elemWrap.appendChild(this.contentElements[i]);
+                    elemBox.appendChild(elemWrap);
+
+                    Polymer.dom(this.$.blok).appendChild(elemBox);
+
+                }
+
+            }
+
+        });
+    </script>
+</dom-module>
